@@ -12,6 +12,8 @@ from .crud import (
 )
 from .nlp_parser import parse_booking_request
 
+
+
 # Create all tables
 Base.metadata.create_all(bind=engine)
 
@@ -41,11 +43,27 @@ app.add_middleware(
 # Startup event - initialize service centers
 @app.on_event("startup")
 def startup_event():
+    """Create tables and initialize data on startup"""
+    print("🔧 Starting database initialization...")
+    
+    # FORCE CREATE ALL TABLES
+    try:
+        Base.metadata.create_all(bind=engine)
+        print("✅ Tables created/verified")
+    except Exception as e:
+        print(f"⚠️ Table creation error: {e}")
+    
+    # Initialize service centers
     db = SessionLocal()
     try:
+        print("🏢 Initializing service centers...")
         initialize_service_centers(db)
+        print("✅ Service centers ready!")
+    except Exception as e:
+        print(f"❌ Service center init error: {e}")
     finally:
         db.close()
+
 
 # ==================== HEALTH CHECK ====================
 
