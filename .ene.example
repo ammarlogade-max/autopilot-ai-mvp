@@ -1,0 +1,8 @@
+# Production environment
+DATABASE_URL=postgresql://user:password@host/database
+API_PORT=8000
+DEBUG=False
+ENVIRONMENT=production
+
+# CORS settings
+ALLOWED_ORIGINS=https://autopilot-ai.streamlit.app,http://localhost:8501
