@@ -350,8 +350,9 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# API Base URL
-API_BASE = "http://localhost:8000"
+
+# NEW (Railway backend URL)
+API_BASE = "https://autopilot-ai-mvp-production.up.railway.app"
 
 # Initialize session state
 if "page" not in st.session_state:
